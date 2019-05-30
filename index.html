@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="popps.js?v=13"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <!-- <script type="text/javascript" src="/js/test.js"></script> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+
+<body>
+    <div id="header">
+        <h1 class="title">Welcome to popps.js</h1>
+        <p>popps.js is an HTML canvas library that assists javascript programmers create cool things
+            fast.
+        </p>
+    </div>
+    <div id="start">
+        <h1 class="title">Get Started</h1>
+        Start using the popps.js library by linking it in your HTML head tag like this:
+        <pre>
+&lt;head&gt;
+    &lt;title&gt;YOUR TITLE&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+    <b>&lt;script type="text/javascript" src="http://js.cadenpopps.com/popps.js"&gt;&lt;/script&gt;</b>
+    &lt;script type="text/javascript" src="YOUR_SCRIPT.js"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+</pre>
+    </div>
+    <div id="refrence">
+        <h1 class="title">Reference</h1>
+        This reference contains all the user-facing functions in popps.js. Each function reference will contain the
+        expected parameters, intended result, and any return values.
+        <div id="example" class="function">
+            <div class="name">example(parameter1, parameter2, <em>optional-parameter3</em>)</div>
+            <div class="description">Expected result and return values will be specified here. In this case, example
+                expects parameter1 to be a number, parameter2 to be a string, and optional-parameter3 is an optional
+                boolean.</div>
+            <div class="example">
+                <pre>
+example(20, "test", true);
+</pre>
+            </div>
+        </div>
+        <div id="rect" class="function">
+            <div class="name">rect(x, y, width, height)</div>
+            <div class="description">Draws a solid rectangle using the current fill color.</div>
+            <div class="example">
+                <pre>
+rect(10,10,50,50);
+</pre>
+            </div>
+        </div>
+        <div id="strokeRect" class="function">
+            <div class="name">strokeRect(x, y, width, height)</div>
+            <div class="description">Draws a hollow rectangle using the current stroke color.</div>
+            <div class="example">
+                <pre>
+strokeRect(15,5,40,40);
+</pre>
+            </div>
+        </div>
+        <div id="ellipse" class="function">
+            <div class="name">ellipse(x, y, radius, <em>radius</em>)</div>
+            <div class="description">Draws a solid ellipse using the current fill color.</div>
+            <div class="example">
+                <pre>
+ellipse(10,10,50,50);
+</pre>
+            </div>
+        </div>
+        <div id="strokeEllipse" class="function">
+            <div class="name">strokeEllipse(x, y, radius, <em>radius</em>)</div>
+            <div class="description">Draws a hollow ellipse using the current stroke color.</div>
+            <div class="example">
+                <pre>
+strokeEllipse(15,5,40,40);
+</pre>
+            </div>
+        </div>
+    </div>
+</body>

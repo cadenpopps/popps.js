@@ -1,0 +1,52 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+html, body{
+    overflow-x: hidden;
+}
+
+body{
+    font-size: 16pt;
+    font-family: 'Montserrat', sans-serif;
+    padding: 60px calc(50vw - 450px);
+}
+
+pre{
+    font-size: 12pt;
+    margin:15px auto;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgb(240,240,240);
+    width: 815px;
+    overflow-x: auto;
+}
+
+.title{
+    text-align: center;
+    padding: 0 0 15px 0;
+}
+
+body>div{
+    display:block;
+    padding: 30px 0;
+}
+
+#reference{
+    display:flex;
+    flex-direction: column;
+}
+
+.function{
+    display:block;
+    margin:10px 0 40px 0;
+}
+
+.function>.name{
+    font-size:18pt;
+    font-weight:600;
+} 
+.function>.description{
+    margin:15px 15px 0 15px;
+}  
