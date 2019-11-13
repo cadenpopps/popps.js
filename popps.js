@@ -743,25 +743,25 @@ function createVector(val1, val2) {
 }
 
 class PoppsVector {
-	constructor(x, y){
+
+	constructor(x, y) {
 		this.x = x;
-		this.y = val2;
+		this.y = y;
 	}
 
-	set(x, val2) {
-		if (val2) {
+	set(x, y) {
+		if (y) {
 			this.x = x;
-			this.y = val2;
-			return this;
+			this.y = y;
 		}
-		if (x) {
+		else if (x) {
 			this.x = x;
 			this.y = 0;
-			return this;
 		}
-		this.x = 0;
-		this.y = 0;
-		return this;
+		else {
+			this.x = 0;
+			this.y = 0;
+		}
 	}
 
 	mult(v2) {
