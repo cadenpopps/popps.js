@@ -729,22 +729,9 @@ PoppsSound.prototype.delete = function () {
 
 PoppsSound.prototype.ended = function () { };
 
-
-function createVector(val1, val2) {
-	if (val1 && val2) {
-		return new PoppsVector(val1, val2);
-	}
-	else if (val1) {
-		return new PoppsVector(val1, 0);
-	}
-	else {
-		return new PoppsVector(0, 0);
-	}
-}
-
 class PoppsVector {
 
-	constructor(x, y) {
+	constructor(x = 0, y = 0) {
 		this.x = x;
 		this.y = y;
 	}
@@ -810,6 +797,18 @@ class PoppsVector {
 			this.y -= v2.y;
 		}
 		return this;
+	}
+}
+
+function createVector(val1, val2) {
+	if (val1 && val2) {
+		return new PoppsVector(val1, val2);
+	}
+	else if (val1) {
+		return new PoppsVector(val1, 0);
+	}
+	else {
+		return new PoppsVector(0, 0);
 	}
 }
 
