@@ -731,81 +731,86 @@ PoppsSound.prototype.ended = function () { };
 
 
 function createVector(val1, val2, val3) {
-	if (val1 && val2 && val3) {
-		return new Vector(val1, val2, val3);
-	}
 	if (val1 && val2) {
 		return new Vector(val1, val2);
 	}
-	if (val1) {
+	else if (val1) {
 		return new Vector(val1, 0);
 	}
-	return new Vector(0, 0);
-}
-
-function Vector(val1, val2) {
-	this.x = val1;
-	this.y = val2;
-}
-
-Vector.prototype.set = function (val1, val2) {
-	if (val2) {
-		this.x = val1;
-		this.y = val2;
-		return this;
+	else {
+		return new Vector(0, 0);
 	}
-	if (val1) {
-		this.x = val1;
+}
+
+class Vector {
+	constructor(x, y){
+		this.x = x;
+		this.y = val2;
+	}
+
+	set(x, val2) {
+		if (val2) {
+			this.x = x;
+			this.y = val2;
+			return this;
+		}
+		if (x) {
+			this.x = x;
+			this.y = 0;
+			return this;
+		}
+		this.x = 0;
 		this.y = 0;
 		return this;
 	}
-	this.x = 0;
-	this.y = 0;
-	return this;
-}
-Vector.prototype.mult = function (v2) {
-	if (typeof v2 === 'number') {
-		this.x *= v2;
-		this.y *= v2;
+
+	mult(v2) {
+		if (typeof v2 === 'number') {
+			this.x *= v2;
+			this.y *= v2;
+		}
+		else {
+			this.x *= v2.x;
+			this.y *= v2.y;
+		}
+		return this;
 	}
-	else {
-		this.x *= v2.x;
-		this.y *= v2.y;
+
+	div(v2) {
+		if (typeof v2 === 'number') {
+			this.x *= v2;
+			this.y *= v2;
+		}
+		else {
+			this.x *= v2.x;
+			this.y *= v2.y;
+		}
+		return this;
 	}
-	return this;
-}
-Vector.prototype.div = function (v2) {
-	if (typeof v2 === 'number') {
-		this.x *= v2;
-		this.y *= v2;
+
+	add(v2) {
+		if (typeof v2 === 'number') {
+			this.x += v2;
+			this.y += v2;
+		}
+		else {
+			this.x += v2.x;
+			this.y += v2.y;
+		}
+		return this;
 	}
-	else {
-		this.x *= v2.x;
-		this.y *= v2.y;
+
+	sub(v2) {
+		if (typeof v2 === 'number') {
+			this.x -= v2;
+			this.y -= v2;
+		}
+		else {
+			this.x -= v2.x;
+			this.y -= v2.y;
+		}
+		return this;
 	}
-	return this;
-}
-Vector.prototype.add = function (v2) {
-	if (typeof v2 === 'number') {
-		this.x += v2;
-		this.y += v2;
-	}
-	else {
-		this.x += v2.x;
-		this.y += v2.y;
-	}
-	return this;
-}
-Vector.prototype.sub = function (v2) {
-	if (typeof v2 === 'number') {
-		this.x -= v2;
-		this.y -= v2;
-	}
-	else {
-		this.x -= v2.x;
-		this.y -= v2.y;
-	}
-	return this;
 }
 
 function applyForces(pos, vel, acc) {
