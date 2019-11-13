@@ -1,4 +1,4 @@
-const DRAGDIST = 10, CORNER = 0, CENTER = 1, COORD = 2, INT = "int", POSITIVE = 0, NEGATIVE = 1;
+const DRAG_DISTANCE_THRESHOLD = 10;
 
 var preloading;
 var canvasElement, canvas, invisibleCanvasElement, invisCanvas;
@@ -68,7 +68,7 @@ function listeners() {
 			mouseIsDown = true;
 		});
 		document.addEventListener("mousemove", function (e) {
-			if (mouseIsDown && abs(dragStartX - event.pageX) > DRAGDIST && abs(dragStartY - event.pageY) > DRAGDIST) {
+			if (mouseIsDown && abs(dragStartX - event.pageX) > DRAG_DISTANCE_THRESHOLD && abs(dragStartY - event.pageY) > DRAG_DISTANCE_THRESHOLD) {
 				dragging = true;
 			}
 			if (dragging) {
@@ -366,41 +366,15 @@ function clearBackground() {
 	canvas.clearRect(0, 0, width, height);
 }
 
-function rect(x1, y1, x2, y2, type) {
+function rect(x1, y1, x2, y2) {
 	canvas.beginPath();
-	if (type === undefined) {
-		canvas.rect(x1, y1, x2, y2);
-	}
-	else if (type == 1) {
-		canvas.rect(x1 - (x2 / 2), y1 - (y2 / 2), x2, y2);
-	}
-	else if (type == 2) {
-		canvas.rect(x1, y1, x2 - x1, y2 - y1);
-	}
-	else {
-		console.log("Invalid Rectangle Type");
-		canvas.closePath();
-		return;
-	}
+	canvas.rect(x1, y1, x2, y2);
 	canvas.fill();
 }
 
-function strokeRect(x1, y1, x2, y2, type) {
+function strokeRect(x1, y1, x2, y2) {
 	canvas.beginPath();
-	if (type === undefined || type === CORNER) {
-		canvas.rect(x1, y1, x2, y2);
-	}
-	else if (type == CENTER) {
-		canvas.rect(x1 - (x2 / 2), y1 - (y2 / 2), x2, y2);
-	}
-	else if (type == COORD) {
-		canvas.rect(x1, y1, x2 - x1, y2 - y1);
-	}
-	else {
-		console.log("Invalid Rectangle Type");
-		canvas.closePath();
-		return;
-	}
+	canvas.rect(x1, y1, x2, y2);
 	canvas.stroke();
 }
 
@@ -557,7 +531,7 @@ function loadAudio(src) {
 	return new PoppsSoundBuffer(src);
 }
 
-// function 
+// function
 
 function initializeAudio() {
 	_audioManager = new PoppsAudioManager();
@@ -775,25 +749,25 @@ function dist(x1, y1, x2, y2) {
 	return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
 }
 
-function osc(val, center, amp, type) {
+function osc(val, center, amp, positive) {
 	if (center === undefined) {
 		return Math.sin(val)
 	}
 	if (amp === undefined) {
 		return Math.sin(val) + center;
 	}
-	if (type === undefined) {
+	if (positive === undefined) {
 		return (Math.sin(val) * amp) + center;
 	}
-	if (type === POSITIVE) {
+	if (positive === true) {
 		return (Math.abs(Math.sin(val)) * amp) + center;
 	}
-	if (type === NEGATIVE) {
+	else if (positive === false) {
 		return (-Math.abs(Math.sin(val)) * amp) + center;
 	}
 }
 
-function oscSpeed(val, center, amp, speed, type) {
+function oscSpeed(val, center, amp, speed, positive) {
 	if (center === undefined) {
 		return Math.sin(val)
 	}
@@ -803,13 +777,13 @@ function oscSpeed(val, center, amp, speed, type) {
 	if (speed === undefined) {
 		return (Math.sin(val) * amp) + center;
 	}
-	if (type === undefined) {
+	if (positive === undefined) {
 		return (Math.sin(val * speed) * amp) + center;
 	}
-	if (type === POSITIVE) {
+	if (positive === true) {
 		return (Math.abs(Math.sin(val * speed)) * amp) + center;
 	}
-	if (type === NEGATIVE) {
+	else if (positive === false) {
 		return (-Math.abs(Math.sin(val * speed)) * amp) + center;
 	}
 }
