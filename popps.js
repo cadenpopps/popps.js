@@ -7,7 +7,7 @@ var looping = false, frameRate = undefined, lastFrameTime = 0, frameCount = 0;
 var font = "sans-serif", fontSize = "10px";
 var mouseIsDown = false, mouseX = 0, mouseY = 0;
 var canvasX = 0, canvasY = 0;
-var key = '', keycode = -1, keys = [], shift = false;
+var key = '', keycode = -1, keys = [], shifting = false;
 var startTime;
 var dragStartX, dragStartY, dragging;
 var _audioManager = undefined;
