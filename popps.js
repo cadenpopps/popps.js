@@ -13,7 +13,14 @@ var dragStartX, dragStartY, dragging;
 var _audioManager = undefined;
 
 document.addEventListener("DOMContentLoaded", function (event) {
-	initializeValues();
+	initPoppsJS();
+});
+
+function initPoppsJS() {
+	windowWidth = window.innerWidth;
+	windowHeight = window.innerHeight;
+	startTime = new Date();
+
 	if (typeof preload === "function" && typeof setup === "function") {
 		preloading = true;
 		preload();
@@ -28,15 +35,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	else if (typeof setup === "function") {
 		startPoppsJs();
 	}
-	else {
-		throw new Error("No setup function found");
-	}
-});
-
-function initializeValues() {
-	windowWidth = window.innerWidth;
-	windowHeight = window.innerHeight;
-	startTime = new Date();
 }
 
 function startPoppsJs() {
@@ -44,8 +42,89 @@ function startPoppsJs() {
 	setup();
 }
 
-function listen() {
-	throw new Error("The function listen() is depreceated");
+class Listener {
+	constructor(callbackFunc) {
+		this.callback = callbackFunc;
+	}
+	event() {
+		this.callback();
+	}
+}
+
+class MouseListener extends Listener {
+	constructor(callbackFunc, canvas) {
+		super(callbackFunc);
+		this.canvas = canvas;
+		this.mouseX = 0;
+		this.mouseY = 0;
+		this.mouseDown = false;
+
+		this.mouseMovedCallback;
+		this.mouseClickedCallback;
+		this.mouseDraggedCallback;
+		this.mouseUpCallback;
+		this.mouseDownCallback;
+	}
+
+	listenTo(eventType, callback) {
+		switch(eventType) {
+			case 'move':
+				this.canvas.addEventListener("mousemove", function (event) { this.mouseMovedEvent(event); });
+				this.mouseMovedCallback = callback;
+				break;
+			case 'click':
+				this.canvas.addEventListener("click", function (event) { this.mouseClickedEvent(event); });
+				this.mouseClickedCallback = callback;
+				break;
+			case 'drag':
+				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
+				this.canvas.addEventListener("mousemove", function (event) { this.mouseDraggedEvent(event); });
+				this.mouseDraggedCallback = callback;
+				break;
+			case 'mouseup':
+				this.canvas.addEventListener("mouseup", function (event) { this.mouseUpEvent(event); });
+				this.mouseUpCallback = callback;
+				break;
+			case 'mousedown':
+				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
+				this.mouseDownCallback = callback;
+				break;
+		}
+	}
+
+	updateMouseCoordinates(event) {
+		mouseX = e.pageX - canvasX;
+		mouseY = e.pageY - canvasY;
+	}
+
+	mouseMovedEvent(event) {
+		updateMouseCoordinates(event);
+		this.mouseMovedCallback();
+	}
+
+	mouseClickedEvent(event) {
+		updateMouseCoordinates(event);
+		this.mouseClickedCallback();
+	}
+
+	mouseDraggedEvent(event) {
+		if(this.mouseDown) {
+			updateMouseCoordinates(event);
+			this.mouseDraggedCallback();
+		}
+	}
+
+	mouseUpEvent(event) {
+		updateMouseCoordinates(event);
+		this.mouseDown = false;
+		this.mouseUpCallback();
+	}
+
+	mouseDownEvent(event) {
+		updateMouseCoordinates(event);
+		this.mouseDown = true;
+		this.mouseDownCallback();
+	}
 }
 
 function listeners() {
@@ -482,11 +561,6 @@ function image(img, sx, sy, sWidth, sHeight, x, y, width, height) {
 }
 
 // -------------------------------   Data Structures   -------------------------------
-
-function _delete(object) {
-	object = null;
-	delete object;
-}
 
 preloadCounter = 0;
 itemsLoaded = 0;
