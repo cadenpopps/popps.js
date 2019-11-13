@@ -46,86 +46,86 @@ class Listener {
 	constructor(callbackFunc) {
 		this.callback = callbackFunc;
 	}
-	event() {
+	sendEvent() {
 		this.callback();
 	}
 }
 
-class MouseListener extends Listener {
-	constructor(callbackFunc, canvas) {
-		super(callbackFunc);
-		this.canvas = canvas;
-		this.mouseX = 0;
-		this.mouseY = 0;
-		this.mouseDown = false;
+// class MouseListener extends Listener {
+// 	constructor(callbackFunc, canvas) {
+// 		super(callbackFunc);
+// 		this.canvas = canvas;
+// 		this.mouseX = 0;
+// 		this.mouseY = 0;
+// 		this.mouseDown = false;
 
-		this.mouseMovedCallback;
-		this.mouseClickedCallback;
-		this.mouseDraggedCallback;
-		this.mouseUpCallback;
-		this.mouseDownCallback;
-	}
+// 		this.mouseMovedCallback;
+// 		this.mouseClickedCallback;
+// 		this.mouseDraggedCallback;
+// 		this.mouseUpCallback;
+// 		this.mouseDownCallback;
+// 	}
 
-	listenTo(eventType, callback) {
-		switch(eventType) {
-			case 'move':
-				this.canvas.addEventListener("mousemove", function (event) { this.mouseMovedEvent(event); });
-				this.mouseMovedCallback = callback;
-				break;
-			case 'click':
-				this.canvas.addEventListener("click", function (event) { this.mouseClickedEvent(event); });
-				this.mouseClickedCallback = callback;
-				break;
-			case 'drag':
-				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
-				this.canvas.addEventListener("mousemove", function (event) { this.mouseDraggedEvent(event); });
-				this.mouseDraggedCallback = callback;
-				break;
-			case 'mouseup':
-				this.canvas.addEventListener("mouseup", function (event) { this.mouseUpEvent(event); });
-				this.mouseUpCallback = callback;
-				break;
-			case 'mousedown':
-				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
-				this.mouseDownCallback = callback;
-				break;
-		}
-	}
+// 	listenTo(eventType, callback) {
+// 		switch(eventType) {
+// 			case 'move':
+// 				this.canvas.addEventListener("mousemove", function (event) { this.mouseMovedEvent(event); });
+// 				this.mouseMovedCallback = callback;
+// 				break;
+// 			case 'click':
+// 				this.canvas.addEventListener("click", function (event) { this.mouseClickedEvent(event); });
+// 				this.mouseClickedCallback = callback;
+// 				break;
+// 			case 'drag':
+// 				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
+// 				this.canvas.addEventListener("mousemove", function (event) { this.mouseDraggedEvent(event); });
+// 				this.mouseDraggedCallback = callback;
+// 				break;
+// 			case 'mouseup':
+// 				this.canvas.addEventListener("mouseup", function (event) { this.mouseUpEvent(event); });
+// 				this.mouseUpCallback = callback;
+// 				break;
+// 			case 'mousedown':
+// 				this.canvas.addEventListener("mousedown", function (event) { this.mouseDownEvent(event); });
+// 				this.mouseDownCallback = callback;
+// 				break;
+// 		}
+// 	}
 
-	updateMouseCoordinates(event) {
-		mouseX = e.pageX - canvasX;
-		mouseY = e.pageY - canvasY;
-	}
+// 	updateMouseCoordinates(event) {
+// 		mouseX = e.pageX - canvasX;
+// 		mouseY = e.pageY - canvasY;
+// 	}
 
-	mouseMovedEvent(event) {
-		updateMouseCoordinates(event);
-		this.mouseMovedCallback();
-	}
+// 	mouseMovedEvent(event) {
+// 		updateMouseCoordinates(event);
+// 		this.mouseMovedCallback();
+// 	}
 
-	mouseClickedEvent(event) {
-		updateMouseCoordinates(event);
-		this.mouseClickedCallback();
-	}
+// 	mouseClickedEvent(event) {
+// 		updateMouseCoordinates(event);
+// 		this.mouseClickedCallback();
+// 	}
 
-	mouseDraggedEvent(event) {
-		if(this.mouseDown) {
-			updateMouseCoordinates(event);
-			this.mouseDraggedCallback();
-		}
-	}
+// 	mouseDraggedEvent(event) {
+// 		if(this.mouseDown) {
+// 			updateMouseCoordinates(event);
+// 			this.mouseDraggedCallback();
+// 		}
+// 	}
 
-	mouseUpEvent(event) {
-		updateMouseCoordinates(event);
-		this.mouseDown = false;
-		this.mouseUpCallback();
-	}
+// 	mouseUpEvent(event) {
+// 		updateMouseCoordinates(event);
+// 		this.mouseDown = false;
+// 		this.mouseUpCallback();
+// 	}
 
-	mouseDownEvent(event) {
-		updateMouseCoordinates(event);
-		this.mouseDown = true;
-		this.mouseDownCallback();
-	}
-}
+// 	mouseDownEvent(event) {
+// 		updateMouseCoordinates(event);
+// 		this.mouseDown = true;
+// 		this.mouseDownCallback();
+// 	}
+// }
 
 function listeners() {
 	if (typeof mouseDown === 'function') {
@@ -562,8 +562,8 @@ function image(img, sx, sy, sWidth, sHeight, x, y, width, height) {
 
 // -------------------------------   Data Structures   -------------------------------
 
-preloadCounter = 0;
-itemsLoaded = 0;
+var preloadCounter = 0;
+var itemsLoaded = 0;
 
 function loadJSON(path) {
 	if (preloading) preloadCounter++;
@@ -729,8 +729,19 @@ PoppsSound.prototype.delete = function () {
 
 PoppsSound.prototype.ended = function () { };
 
-class PoppsVector {
+// var PoppsVector=function(){
+// 	function PoppsVector()
+// 	{var x=arguments.length>0&&arguments[0]!==undefined?arguments[0]:0;var y=arguments.length>1&&arguments[1]!==undefined?arguments[1]:0;_classCallCheck(this,PoppsVector);this.x=x;this.y=y}_createClass(PoppsVector,[
+// 		{key:"set",value:function set(x,y)
+// 			{if(y)
+// 				{this.x=x;this.y=y}else if(x)
+// 				{this.x=x;this.y=0}else
+// 				{this.x=0;this.y=0}}},
+// 		{key:"mult",value:function mult(v2)
+// 			{if(typeof v2==="number"){this.x*=v2;this.y*=v2}else{this.x*=v2.x;this.y*=v2.y}return this}},{key:"div",value:function div(v2){if(typeof v2==="number"){this.x*=v2;this.y*=v2}else{this.x*=v2.x;this.y*=v2.y}return this}},{key:"add",value:function add(v2){if(typeof v2==="number"){this.x+=v2;this.y+=v2}else{this.x+=v2.x;this.y+=v2.y}return this}},{key:"sub",value:function sub(v2){if(typeof v2==="number"){this.x-=v2;this.y-=v2}else{this.x-=v2.x;this.y-=v2.y}return this}}]);return PoppsVector
+// }();
 
+class PoppsVector {
 	constructor(x = 0, y = 0) {
 		this.x = x;
 		this.y = y;
@@ -801,10 +812,10 @@ class PoppsVector {
 }
 
 function createVector(val1, val2) {
-	if (val1 && val2) {
+	if (val1 !== undefined && val2 !== undefined) {
 		return new PoppsVector(val1, val2);
 	}
-	else if (val1) {
+	else if (val1 !== undefined) {
 		return new PoppsVector(val1, 0);
 	}
 	else {
