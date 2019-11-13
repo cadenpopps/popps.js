@@ -730,19 +730,19 @@ PoppsSound.prototype.delete = function () {
 PoppsSound.prototype.ended = function () { };
 
 
-function createVector(val1, val2, val3) {
+function createVector(val1, val2) {
 	if (val1 && val2) {
-		return new Vector(val1, val2);
+		return new PoppsVector(val1, val2);
 	}
 	else if (val1) {
-		return new Vector(val1, 0);
+		return new PoppsVector(val1, 0);
 	}
 	else {
-		return new Vector(0, 0);
+		return new PoppsVector(0, 0);
 	}
 }
 
-class Vector {
+class PoppsVector {
 	constructor(x, y){
 		this.x = x;
 		this.y = val2;
